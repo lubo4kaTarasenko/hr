@@ -1,0 +1,61 @@
+.profile
+  %div
+    NAME:
+    %b= @user[:name]
+  %div 
+    LEVEL:
+    %b= @user[:level]
+  %div
+    SKILLS:
+    %b= @user[:skills]
+  %div 
+    ENGLISH:
+    %b= @user[:english_level]
+  %br
+  .vacation
+    %button.btn.btn-warning#vacation Need vacation
+    = form_tag( vacation_path, {:class => 'hidden vac_form'}) do
+      .mb-5
+        %label.form-label{for: "days"} how much days?
+        %select#days.form-control{name: 'days'}
+          %option 1
+          %option 2
+          %option 3
+          %option 4
+          %option 5
+          %option 6
+      .mb-5
+        %label.form-label{for: "start"} Start date:
+        %input#start.form-control{type: "date",  min: Date.today, max: Date.today.end_of_month, name: 'start'}
+      %button.btn.btn-success#submit_vac{type: "submit"} Submit
+  %br
+  .needs
+    %button.btn.btn-warning#need Need equipment
+    = form_tag( equipment_path, {:class => 'hidden eq_form'}) do
+      .mb-5
+        %label.form-label{for: "message"} Type of equipment(monitor, keyboard...) and comments
+        %input#message.form-control{name: 'message'}
+      %button.btn.btn-success#submit{type: "submit"} Submit
+  %br
+  .sick
+    %button.btn.btn-warning#sick Sick leave
+    = form_tag(sick_leave_path, {:class => 'hidden sick_form'}) do
+      .mb-5
+        %label.form-label{for: "start_sick"} Start_date:
+        %input#start_sick.form-control{type: "date",  min: Date.today, max: Date.today.end_of_month, name: 'start_sick'}
+      .md-5
+        %label.form-label{for: "sick_days"} how much days?
+        %select#sick_days.form-control{name: 'sick_days'}
+          %option 0.5
+          %option 1
+          %option 2
+          %option 3
+      %br
+      %button.btn.btn-success#submit_sick{type: "submit"} Submit
+  %hr
+  %h5 Period
+  = form_tag( report_path(format: 'js'), class: 'report_form', remote: true ) do
+    %input#start_sick.form-control{type: "date", name: 'date'}
+    %br
+    %button.btn.btn-success#submit_report{type: "submit"} Submit
+  .report_table

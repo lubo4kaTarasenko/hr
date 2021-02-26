@@ -1,0 +1,23 @@
+.container
+  %h3 USERS
+
+  %table.table
+    %thead
+      %tr
+        %th name
+        %th english level
+        %th skills 
+        %th level
+    %tbody
+    - @paginated_users.each  do |user|
+      %tr      
+        %td= user[:name]
+        %td= user[:english_level]
+        %td= user[:skills]
+        %td= user[:level]
+        - if can? :book, User
+          %td= "free hours: #{user[:hours]}"
+          %td 
+            = link_to "BOOK", book_path(user_id: user[:_id], user: user[:name]),  class: "btn btn-info"
+  = paginate @paginated_users
+    

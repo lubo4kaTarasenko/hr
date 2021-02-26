@@ -1,0 +1,26 @@
+.book
+  %h5
+    = params[:user]
+  = form_tag('/book') do
+    .mb-5
+      %label.form-label{for: "time"} Time in hours
+      %input#time.form-control{name: 'time'}
+    .mb-5
+      %label.form-label{for: "start"} Start date:
+      %input#start.form-control{type: "date",  min: Date.today, max: Date.today.end_of_month, name: 'start'}
+    .mb-5
+      %label.form-label{for: "finish"} Finish date:
+      %input#finish.form-control{type: "date",  min: Date.today, max: Date.today.end_of_month, name: 'finish'}
+    .mb-5.form-check
+      %input#status.form-check-input{type: "checkbox", name: 'status'}/
+      %label.form-check-label{for: "status"} Overtime
+    .md-5
+      %label.form-label{for: "project"} Project:
+      %select#project.form-control{name: "project"}
+        - @projects.each do |project|
+          %option= project
+
+    = hidden_field_tag "user", params[:user_id]
+    %br
+    %button.btn.btn-primary{type: "submit"} Submit
+    

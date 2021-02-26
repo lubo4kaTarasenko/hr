@@ -1,0 +1,28 @@
+.container{
+  margin-left: 20px;
+}
+.book{
+  width: 30%;
+  margin-left: 20px
+}
+.profile{
+  margin-left: 20px;
+  width: 50%;
+}
+.profile b{
+  padding-left: 50px;
+  
+}
+.hidden{
+  display: none !important;
+}
+.container li {
+  padding: 5px;
+}
+.container ul {
+  margin: auto;
+  width: 30%;
+}
+input[type='checkbox']{
+  margin-left: 10px;
+}

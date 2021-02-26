@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title Hr
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %link{ rel: "stylesheet",
+      href: "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css", 
+      integrity: "sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1", 
+      crossorigin: "anonymous" }
+    %title Converter
+  %body
+    %nav.navbar.navbar-dark.bg-dark
+      .container-fluid
+        %span.navbar-text
+          hr-app
+        = link_to 'Home', root_path
+        - if current_user
+          = link_to 'Profile', profile_path
+          = link_to "Log out", destroy_user_session_path, method: :delete
+          - if can? :book, User
+            = link_to 'Manager page', manager_page_path 
+        - else 
+          = link_to "Sign up", new_user_registration_path
+          = link_to "Log in", user_session_path
+    %p.notice= notice
+    %p.alert= alert
+    =yield
+    %script{src: "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js",
+      integrity: "sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW", 
+      crossorigin: "anonymous" }

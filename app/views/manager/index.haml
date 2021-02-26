@@ -1,0 +1,44 @@
+.container
+  %h3 USERS
+  %button.btn.btn-success#export Export to google doc
+  = form_tag( export_doc_path, {:class => 'hidden export_form'}) do
+    .mb-5
+      %input{name: 'csv[name]', type: 'checkbox'} name 
+      %input{name: 'csv[email]', type: 'checkbox'} email
+      %input{name: 'csv[english]', type: 'checkbox'} english
+      %input{name: 'csv[skills]', type: 'checkbox'} skills
+      %input{name: 'csv[level]', type: 'checkbox'} level
+      %input{name: 'csv[vacations]', type: 'checkbox'} unused vacations
+      %input{name: 'csv[sick_leaves]', type: 'checkbox'} unused sick_days
+      %input{name: 'csv[time_slots]', type: 'checkbox'} booked_slots
+      %input{name: 'csv[hours]', type: 'checkbox'} free hours
+    %button.btn.btn-success#export_submit{type: "submit"} Submit
+  %table.table
+    %thead
+      %tr
+        %th name
+        %th email
+        %th english
+        %th skills 
+        %th level
+        %th unused vacations
+        %th unused sick_days
+        %th booked_slots
+        %th free hours
+    %tbody
+    - @users.each  do |user|
+      %tr      
+        %td= user[:name]
+        %td= user[:email]
+        %td= user[:english_level]
+        %td= user[:skills]
+        %td= user[:level]
+        %td= user[:vacations]
+        %td= user[:sick_leaves]
+        %td
+          - user[:time_slots].each do |slot|
+            %p= slot
+        %td= user[:hours]
+        %td 
+          = link_to "BOOK", book_path(user_id: user[:_id], user: user[:name]),  class: "btn btn-info"
+  = paginate @paginated_users
